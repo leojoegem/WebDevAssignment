@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #4CAF50;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .tab {
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .tab:hover {
+            background-color: #45a049;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .profile-info {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .profile-info h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .update-form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.php" id="home-tab" class="tab">Home</a>
+    <a href="destinations.html" id="destinations-tab" class="tab">Destinations</a>
+    <a href="profile.html" id="profile-tab" class="tab">Profile</a>
+</div>
+
+<div class="content">
+    <div class="profile-info">
+        <h2>Hello, [User Name]!</h2>
+        <p>Your Profile Information:</p>
+        <p>Email: user@example.com</p>
+        <p>Member Since: [Join Date]</p>
+    </div>
+
+    <!-- Update Profile Form -->
+    <div class="update-form">
+        <h2>Update Your Profile</h2>
+        <form method="POST" action="update_profile.php">
+            <div class="form-group">
+                <label for="username">New Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">New Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">New Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Update Profile</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle tab switching
+    document.getElementById("home-tab").addEventListener("click", function () {
+        loadPage("index.php");
+    });
+
+    document.getElementById("destinations-tab").addEventListener("click", function () {
+        loadPage("destinations.html");
+    });
+
+    document.getElementById("profile-tab").addEventListener("click", function () {
+        loadPage("profile.html");
+    });
+
+    function loadPage(page) {
+        document.querySelector(".content").innerHTML = "Loading...";
+        setTimeout(function () {
+            fetch(page)
+                .then(response => response.text())
+                .then(data => {
+                    document.querySelector(".content").innerHTML = data;
+                })
+                .catch(error => {
+                    console.error("Error loading page:", error);
+                    document.querySelector(".content").innerHTML = "Error loading page.";
+                });
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>

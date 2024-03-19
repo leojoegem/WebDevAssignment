@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f8f8;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .tab {
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .tab:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .content {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .destination {
+            width: 200px;
+            margin: 20px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .destination img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .destination h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .destination p {
+            font-size: 1em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .destination button {
+            background-color: #333;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .destination button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="index.php" id="home-tab" class="tab">Home</a>
+    <a href="destinations.html" id="destinations-tab" class="tab">Destinations</a>
+    <a href="profile.html" id="profile-tab" class="tab">Profile</a>
+</div>
+
+<div class="content">
+    <!-- Placeholder destinations with prices -->
+    <div class="destination">
+        <img src="Images/beach_destination.jpg" alt="Beach Destination">
+        <h3>Tropical Paradise</h3>
+        <p>$1,500</p>
+        <button>Book Now</button>
+    </div>
+
+    <div class="destination">
+        <img src="Images/mountain_destination.jpg" alt="Mountain Destination">
+        <h3>Mountain Retreat</h3>
+        <p>$1,200</p>
+        <button>Book Now</button>
+    </div>
+
+    <div class="destination">
+        <img src="Images/city_destination.jpg" alt="City Destination">
+        <h3>Urban Adventure</h3>
+        <p>$800</p>
+        <button>Book Now</button>
+    </div>
+
+    <div class="destination">
+        <img src="Images/wildlife_destination.jpg" alt="Wildlife Destination">
+        <h3>Wildlife Safari</h3>
+        <p>$2,000</p>
+        <button>Book Now</button>
+    </div>
+
+    <div class="destination">
+        <img src="Images/historical_destination.jpg" alt="Historical Destination">
+        <h3>Historical Exploration</h3>
+        <p>$1,000</p>
+        <button>Book Now</button>
+    </div>
+
+    <div class="destination">
+        <img src="Images/desert_destination.jpg" alt="Desert Destination">
+        <h3>Desert Adventure</h3>
+        <p>$1,300</p>
+        <button>Book Now</button>
+    </div>
+
+    <!-- Add more destinations as needed -->
+    <!-- Repeat the structure for each destination -->
+
+</div>
+
+<script>
+    // JavaScript to handle tab switching
+    document.getElementById("home-tab").addEventListener("click", function () {
+        loadPage("index.php");
+    });
+
+    document.getElementById("destinations-tab").addEventListener("click", function () {
+        loadPage("destinations.html");
+    });
+
+    document.getElementById("profile-tab").addEventListener("click", function () {
+        loadPage("profile.html");
+    });
+
+    function loadPage(page) {
+        document.querySelector(".content").innerHTML = "Loading...";
+        setTimeout(function () {
+            fetch(page)
+                .then(response => response.text())
+                .then(data => {
+                    document.querySelector(".content").innerHTML = data;
+                })
+                .catch(error => {
+                    console.error("Error loading page:", error);
+                    document.querySelector(".content").innerHTML = "Error loading page.";
+                });
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
